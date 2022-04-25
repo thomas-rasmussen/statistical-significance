@@ -1,0 +1,67 @@
+---
+title: "Statistical significance"
+author: "Thomas Bøjer Rasmussen"
+institute: "Department of Clinical Epidemiology<br>Aarhus University Hospital"
+date: "yyyy-mm-dd"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "my-css.css"]
+    seal: true # Automatic title slide from YAML
+    nature:
+      self_contained: false
+      ratio: '16:9' # Display ratio (default 4:3)
+---      
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  dev = "svglite",
+  dev.args = list(bg="transparent"),
+  fig.width = 9, 
+  fig.height = 4
+)
+
+library("svglite")
+library("RefManageR")
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color = "#23395b")
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+```{r load-refs, include=FALSE}
+BibOptions(
+  check.entries = FALSE,
+  bib.style = "numeric",
+  cite.style = "numeric",
+  style = "text",
+  use.regex = TRUE,
+  ignore.case = TRUE,
+  hyperlink = FALSE,
+  dashed = FALSE
+)
+my_bib <- ReadBib("./bibliography.bib", check = FALSE)
+```
+
+
+## test slide
+
+Made with `xaringan` package in R.
+
+
+---
+
+## References
+
+```{r refs, echo=FALSE, results="asis"}
+# Use NoCite to add all references that are not cited to the bibliography
+NoCite(my_bib, "*")
+PrintBibliography(my_bib)
+```
