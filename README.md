@@ -2,14 +2,21 @@
 
 Notes on testing of statistical significance
 
+[Link to notes](https://thomas-rasmussen.github.io/statistical-significance/statistical-significance.html)
+
 [Link to slides](https://thomas-rasmussen.github.io/statistical-significance/slides/slides.html)
 
 
+# Currently working on
+- Summarizing the points from articles included in bibliography
+
 # TODO
-1) Summarize message from "Scientists rise up against significance" into a few intro slides.
-2) Re "The ASA Statement on p-Values: Context, Process, and Purpose"
 3) Find articles with alternatives to p-values / CI's?
 4) Find references for p-values in "table 1"'s and why one should not do that
+5) Ideally it would be possible to use the same bibliography file for both the notes and slides. Figure out if
+   this is possible.
+
+
 
 list of potentially relevant articles:
 1) https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4867863/

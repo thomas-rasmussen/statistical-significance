@@ -1,0 +1,23 @@
+---
+title: "Statistical significance"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    collapsed: false
+    number sections: true
+    self_contained: true
+    theme: lumen
+bibliography: bibliography.bib
+csl: ieee.csl
+nocite: '@*'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Notes on statistical significance. Reference test[@amrhein_scientists_2019]
+
+# References

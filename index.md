@@ -1,1 +1,3 @@
-Link to slides: [slide link](/slides/slides.html)
+Link to notes: [notes link](statistical-significance.html)
+
+Link to slides: [slides link](/slides/slides.html)
