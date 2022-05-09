@@ -16,8 +16,92 @@ nocite: '@*'
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
 ```
 
-Notes on statistical significance. Reference test[@amrhein_scientists_2019]
+Notes on statistical significance.
+
+# What is a test statistic?
+
+A test statistic is a numerical summary of some sample, $X$, to one value
+that can be used to perform a hypothesis test. The test statistic is
+chosen/defined in such a way that its sampling distribution under the null
+hypothesis of interest is calculable, either exactly or approximately, so it can
+be used to calculate _p_-values.
+
+Normal distributed data, unknown variance
+
+$$X \sim N(\mu, \sigma^2),\ \ \ T = \frac{\hat{X} - \mu_0}{s / \sqrt{n}} \sim t(n-1)$$
+Here the null hypothesis is usally chosen as $H_0: \mu_0 = 0$. This test
+statistic follows a Student's $t$ distribution, a distribution that is
+calculable, ie we can easily calculate/estimate the CDF (needed for the p-value).
+
+
+# What is a _p_-value?
+
+Definition from wikipedia:
+
+Let $t$ be an observed test statistic from an unknown distribution $T$. Then the
+_p_-value $p$ is the prior probability of observing a test-statistic value at as
+"extreme" as $t$ under the assumed null hypothesis $H_0$. 
+
+Using our normal distribution example, we have that $T$ is symmetric around zero,
+so 
+
+$$p = P(|T| \geq |t| | H_0) = 2*F_{t(f)}(-|Z|)$$
+
+The _p_-value is a function of the chosen test statistic, and is therefore a
+random variable. If the null hypothesis is true, and the underlying random variable
+is continuous then $p \sim U(0, 1)$ (Follow-up on this, should be easy to prove/understand why)
+
+# Example
+
+```{r}
+
+# Simulate data from standard normal distribution
+set.seed(1)
+n_obs <- 1000
+n_dat <- 1000
+
+dat <- data.frame(
+  x = rnorm(n_obs * n_dat),
+  dataset = rep(1:n_dat, times = n_obs)
+  ) %>%
+  group_by(dataset) %>%
+  summarize(z = (mean(x) - 0)/(sd(x)/sqrt(n_obs))) %>%
+  mutate(p = 2*pt(-abs(z), df = n_obs - 1))
+
+# z statistic should have standard normal distribution.
+dat %>%
+  ggplot(aes(x = z)) +
+  geom_density() +
+  geom_histogram(aes(y = ..density..), binwidth = 0.2, alpha = 0.5) +
+  labs(title = "Test statistic distribtion")
+
+# p-value should be uniformly distributed in [0;1]
+dat %>%
+  ggplot(aes(x = p)) +
+  geom_density() +
+  geom_histogram(aes(y = ..density..), binwidth = 0.05, alpha = 0.5) +
+  labs(title = "p-value distribution")
+
+# p-value is prior probability of observing new test statistic at least as
+# extreme as the observed one.
+
+dat$p[1]
+
+```
+
+The t-statistic in the first sample is z = `r dat$z[1]`. The proportion of
+other t-statistics in the samples that are at least as extreme is
+`r mean(abs(dat$z[1]) < abs(dat$z[-1]))`, and the p-value for the first sample
+is `r dat$p[1]`. These values are close to each other and would converge with
+larger amount of data.
+
+
+# Interpretation of the _p_-value
+
 
 # References
