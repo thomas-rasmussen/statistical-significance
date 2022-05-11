@@ -13,8 +13,7 @@ Notes on testing of statistical significance
 # TODO
 3) Find articles with alternatives to p-values / CI's?
 4) Find references for p-values in "table 1"'s and why one should not do that
-5) Ideally it would be possible to use the same bibliography file for both the notes and slides. Figure out if
-   this is possible.
+
 
 
 

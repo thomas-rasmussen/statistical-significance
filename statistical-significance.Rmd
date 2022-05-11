@@ -9,7 +9,7 @@ output:
     number sections: true
     self_contained: true
     theme: lumen
-bibliography: bibliography.bib
+bibliography: ./slides/bibliography.bib
 csl: ieee.csl
 nocite: '@*'
 ---
