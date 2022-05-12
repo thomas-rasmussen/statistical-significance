@@ -1662,10 +1662,37 @@ context this is probably not the appropriate conclusion.</p>
 <p>If <span class="math inline">\(n\)</span> is large, everything is
 significantly different. Not helpful.</p>
 </div>
+<div id="confidence-intervals" class="section level1">
+<h1>Confidence intervals</h1>
+<p>For a given estimate, the 95% confidence interval is the set of all
+parameter values for which <span class="math inline">\(p \geq
+0.05\)</span>.</p>
+<p>A common misinterpretation of the “coverage probability” of a CI is
+that is that given a CI then there is a <span class="math inline">\(1-\alpha\)</span> percent probility that the CI
+contains the true parameter. This is backwards. The coverage probability
+of a CI is that GIVEN the true paramter, an as yet unknown CI has a
+<span class="math inline">\(1-\alpha\)</span> probability of including
+the true value (given correct model assumptions). This is a variation of
+the incorrect interpretation of a p-value as a probability of there
+being a null-effect.</p>
+</div>
+<div id="bayesian-probability-probability-intervals" class="section level1">
+<h1>Bayesian probability probability intervals</h1>
+<p>Could be interesting to include something on this.</p>
+</div>
 <div id="d-values" class="section level1">
 <h1><em>D</em>-values</h1>
 <p>A proposed alternative to <em>p</em>-values. Might be out of
 scope?</p>
+</div>
+<div id="test-code-in-mathjax" class="section level1">
+<h1>Test code in mathjax</h1>
+<pre class="r"><code>val &lt;- 1.4
+val_list &lt;- list(val = 1.4)</code></pre>
+<p>math formula using dynamic value: <span class="math inline">\(val =
+1.4\)</span>, <span class="math inline">\(val = 1.4\)</span></p>
+<p><span class="math display">\[val = 1.4\]</span> <span class="math display">\[val = 1.4\]</span></p>
+<p>Renders correctly, only preview in RStudio is incorrect.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
@@ -1703,6 +1730,13 @@ Gelman and H. Stern, <span>“The <span>Difference</span>
 Demidenko, <span>“The p-<span>Value</span> <span>You</span>
 <span>Can</span>’t <span>Buy</span>,”</span> <em>The American
 Statistician</em>, 2016.</div>
+</div>
+<div id="ref-poole_low_2001" class="csl-entry">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">C.
+Poole, <span>“Low <span>P</span>-<span>Values</span> or
+<span>Narrow</span> <span>Confidence</span> <span>Intervals</span>:
+<span>Which</span> <span>Are</span> <span>More</span>
+<span>Durable</span>?”</span> <em>Epidemiology</em>, 2001.</div>
 </div>
 </div>
 </div>

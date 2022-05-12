@@ -135,9 +135,41 @@ appropriate conclusion.
 
 If $n$ is large, everything is significantly different. Not helpful.
 
+# Confidence intervals
+
+For a given estimate, the 95% confidence interval is the set of all parameter
+values for which $p \geq 0.05$.
+
+A common misinterpretation of the "coverage probability" of a  CI is that is
+that given a CI then there is a $1-\alpha$ percent probility that the CI contains
+the true parameter. This is backwards. The coverage probability of a CI is that
+GIVEN the true paramter, an as yet unknown CI has a $1-\alpha$ probability of
+including the true value (given correct model assumptions). This is a variation
+of the incorrect interpretation of a p-value as a probability of there being a
+null-effect.
+
+# Bayesian probability probability intervals
+
+Could be interesting to include something on this. 
 
 # _D_-values
 
 A proposed alternative to _p_-values. Might be out of scope?
+
+# Test code in mathjax
+
+```{r}
+val <- 1.4
+val_list <- list(val = 1.4)
+```
+
+math formula using dynamic value: $val = `r val`$, $val = `r val_list$val`$
+
+$$val = `r val`$$
+$$val = `r val_list$val`$$
+
+
+
+Renders correctly, only preview in RStudio is incorrect.
 
 # References
