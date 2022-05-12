@@ -103,5 +103,41 @@ larger amount of data.
 
 # Interpretation of the _p_-value
 
+# Problems with the _p_-value
+
+Besides being hard to interpret correctly, the _p_-values is also sensitive to
+the sample size. Everything is "significant" if $n$ is large. 
+
+Take for example, a standard observational study with $n = 10000$, where we make
+a descriptive analysis, showing the proportion of a patient characteristic in
+each exposure group. Let's say we want to include p-values testing whether or not
+the distribution of a dichotomous covariate is equal in each exposure group (not a good
+idea in the first place, separate discussion). 
+
+```{r}
+set.seed(1)
+n <- 10000
+n_0 <- n/2
+n_1 <- n/2
+cov_0 <- rbinom(n_0, 1, 0.51)
+cov_1 <- rbinom(n_1, 1, 0.49)
+p_1 <- mean(cov_1)
+p_0 <- mean(cov_0)
+p <- (sum(cov_1) + sum(cov_0)) / (n_1 + n_0)
+z <- (p_1 - p_0) / (sqrt(p*(1-p)*(1/n_1 + 1/n_0)))
+p_val <- 2*pnorm(-abs(z))
+p_val
+```
+We can see that even though the underlying distribution is basically identical
+the test concludes that the distribution is "significantly" different. This might
+be true in a mathematical sense, but in this context this is probably not the
+appropriate conclusion. 
+
+If $n$ is large, everything is significantly different. Not helpful.
+
+
+# _D_-values
+
+A proposed alternative to _p_-values. Might be out of scope?
 
 # References

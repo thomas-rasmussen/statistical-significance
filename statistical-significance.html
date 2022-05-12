@@ -1632,6 +1632,41 @@ data.</p>
 <div id="interpretation-of-the-p-value" class="section level1">
 <h1>Interpretation of the <em>p</em>-value</h1>
 </div>
+<div id="problems-with-the-p-value" class="section level1">
+<h1>Problems with the <em>p</em>-value</h1>
+<p>Besides being hard to interpret correctly, the <em>p</em>-values is
+also sensitive to the sample size. Everything is “significant” if <span class="math inline">\(n\)</span> is large.</p>
+<p>Take for example, a standard observational study with <span class="math inline">\(n = 10000\)</span>, where we make a descriptive
+analysis, showing the proportion of a patient characteristic in each
+exposure group. Let’s say we want to include p-values testing whether or
+not the distribution of a dichotomous covariate is equal in each
+exposure group (not a good idea in the first place, separate
+discussion).</p>
+<pre class="r"><code>set.seed(1)
+n &lt;- 10000
+n_0 &lt;- n/2
+n_1 &lt;- n/2
+cov_0 &lt;- rbinom(n_0, 1, 0.51)
+cov_1 &lt;- rbinom(n_1, 1, 0.49)
+p_1 &lt;- mean(cov_1)
+p_0 &lt;- mean(cov_0)
+p &lt;- (sum(cov_1) + sum(cov_0)) / (n_1 + n_0)
+z &lt;- (p_1 - p_0) / (sqrt(p*(1-p)*(1/n_1 + 1/n_0)))
+p_val &lt;- 2*pnorm(-abs(z))
+p_val</code></pre>
+<pre><code>## [1] 0.003278804</code></pre>
+<p>We can see that even though the underlying distribution is basically
+identical the test concludes that the distribution is “significantly”
+different. This might be true in a mathematical sense, but in this
+context this is probably not the appropriate conclusion.</p>
+<p>If <span class="math inline">\(n\)</span> is large, everything is
+significantly different. Not helpful.</p>
+</div>
+<div id="d-values" class="section level1">
+<h1><em>D</em>-values</h1>
+<p>A proposed alternative to <em>p</em>-values. Might be out of
+scope?</p>
+</div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body">
@@ -1662,6 +1697,12 @@ Gelman and H. Stern, <span>“The <span>Difference</span>
 <span>Itself</span> <span>Statistically</span>
 <span>Significant</span>,”</span> <em>The American Statistician</em>,
 2006.</div>
+</div>
+<div id="ref-demidenko_p-value_2016" class="csl-entry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">E.
+Demidenko, <span>“The p-<span>Value</span> <span>You</span>
+<span>Can</span>’t <span>Buy</span>,”</span> <em>The American
+Statistician</em>, 2016.</div>
 </div>
 </div>
 </div>
