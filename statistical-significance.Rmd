@@ -19,6 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(dplyr)
 library(ggplot2)
+library(gtsummary)
 ```
 
 Notes on statistical significance.
@@ -41,11 +42,24 @@ calculable, ie we can easily calculate/estimate the CDF (needed for the p-value)
 
 # What is a _p_-value?
 
-Definition from wikipedia:
-
 Let $t$ be an observed test statistic from an unknown distribution $T$. Then the
 _p_-value $p$ is the prior probability of observing a test-statistic value at as
 "extreme" as $t$ under the assumed null hypothesis $H_0$. 
+
+The _p_-value can also be viewed as the probability of obtaining an estimate
+at least as far from a specified values (eg the null value) as the estimate
+we have obtained, if the specified value were the true value. In other words,
+the _p_-value is a tail area probability based on the observed effect estimate;
+it is calculated as the probability of an effect estimate as large as or larger
+than the observed estimtae, assuming the null hypothesis is true.
+
+Note that the _p_-value is a mixed measure: it mixes the estimated effect size
+with its estimated precision, both crucial aspects of the data. It is obviously
+not possible to present two quantities by one single number. For example, consider
+the test statistic $Z$: we can make the test statistic (and therefore the _p_-value)
+greater by either increasing the parameter estimate or lowering the estimated standard error. As a consequence, everyting is significant if you just have enough data
+(which would lower the standard error).
+
 
 Using our normal distribution example, we have that $T$ is symmetric around zero,
 so 
@@ -147,6 +161,65 @@ GIVEN the true paramter, an as yet unknown CI has a $1-\alpha$ probability of
 including the true value (given correct model assumptions). This is a variation
 of the incorrect interpretation of a p-value as a probability of there being a
 null-effect.
+
+# _p_-values in table 1's
+
+It is not uncommon to encounter so-called table 1's presenting the distribution
+of patient characteristics in each exposure group, where _p_-values have been
+included to test the comparability of the distribution in each group.
+
+In the case of a randomized controlled trial, this is completely senseless
+[@stang_ongoing_2010]. By design, we know that the means of the distributions are
+equal, and any departure from this is caused by chance. Testing whether any
+difference is caused by chance, is unreasonable, since the answer is always yes,
+regardless of the _p_-value. By design (using $\alpha = 0.05$), we would also
+expect significant _p_-values once for each 20 covariates on average.
+
+The logic is the same in a propensity score matched or weighted cohort in an
+observational study.
+
+For a traditional table 1 in an observational study, including _p_-values, also
+seem meaningless. The purpose of the analysis is descriptive: how does the
+population look like. There are (typically) no hypotheses about the distribution of
+covariates in the population of interest, and whether or not the distributions are "significantly" different has no relevance or impact on the study. It is the magnitude of imbalances between the group that is of interest, and the evaluation of this requires subject matter judgement, that can not be answered by statistical tests.
+A mean difference of 0.1 year of age in two treatment groups will be highly
+statistical significance in a significantly large population, but it is unlikely
+to be clinically relevant, and any regression/causal models in the study would
+likely include age, regardless of group distributions, _p_-values or whatever.
+
+In the case of an observational study with the aim of simply describing a
+population, _p_-values still seem inappropriate. Large population: everything
+is significantly different. Evaluation still requires subject knowledge matter?
+
+In any case, the _p_-value is a poor choice of statistic to evaluate whether or
+not there are distribution imbalances? In this case using standardized differences
+would be more appropriate?
+
+```{r}
+set.seed(1)
+n <- 10**4
+dat <- tibble(
+  group = rbinom(n, 1, 0.5),
+  age = rnorm(n, mean = 60 + group, sd = 10),
+  biomarker = rnorm(n, mean = 1 + group, sd = 0.5)
+)
+
+tbl <- dat %>%
+  tbl_summary(
+    by = group,
+    statistic = list(all_continuous() ~ "{mean} ({sd})"),
+    digits = list(age ~ c(1, 1))
+  ) %>%
+  add_p()
+
+tbl
+```
+
+As the example shows it does not take a big population to get small _p_-values.
+But is a mean difference of 1 year of age has any clinical revalence? Probably not.
+On the other hand, a difference of 1 unit of a biomarker might be enourmous and
+very important. Interpretation takes subject matter knowledge.
+
 
 # Bayesian probability probability intervals
 

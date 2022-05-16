@@ -18,5 +18,4 @@ Notes on testing of statistical significance
 
 
 list of potentially relevant articles:
-- https://link.springer.com/article/10.1007/s10654-010-9440-x
 - https://journals.lww.com/epidem/Fulltext/2001/05000/It_s_Time_to_Rehabilitate_the_P_Value.4.aspx
