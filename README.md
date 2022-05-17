@@ -8,14 +8,15 @@ Notes on testing of statistical significance
 
 
 # Currently working on
-- Summarizing the points from articles included in bibliography
+- Summarizing points from articles included in bibliography
+
 
 # TODO
-3) Find articles with alternatives to p-values / CI's?
-4) Find references for p-values in "table 1"'s and why one should not do that
+1) Find more relevant articles
+2) Pick specific section of notes and work on the current notes.
 
 
 
 
 list of potentially relevant articles:
-- https://journals.lww.com/epidem/Fulltext/2001/05000/It_s_Time_to_Rehabilitate_the_P_Value.4.aspx
+

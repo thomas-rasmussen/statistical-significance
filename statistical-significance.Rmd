@@ -213,12 +213,84 @@ tbl <- dat %>%
   add_p()
 
 tbl
+
 ```
 
 As the example shows it does not take a big population to get small _p_-values.
 But is a mean difference of 1 year of age has any clinical revalence? Probably not.
 On the other hand, a difference of 1 unit of a biomarker might be enourmous and
 very important. Interpretation takes subject matter knowledge.
+
+
+# Compare parametric and non-parametric p-value
+
+Assume two independent samples with unknown variances. We make no assumption
+of normal distributed populations, but we ensure that $n_1 + n_2 > 40$.
+
+To test the hypothesis of equal means, we could either use Welch's t-test or
+the Wilcox rank-sum test.
+
+```{r}
+
+set.seed(1)
+n <- 10**3
+n1 <- n/2
+n2 <- n/2
+x1 <- rnorm(n1)
+x2 <- rnorm(n2, mean = 0.1)
+
+d_0 <- 0
+s12 = var(x1)
+s22 = var(x2)
+
+t = ((mean(x1) - mean(x2)) - d_0)/(sqrt(s12/n1 + s22/n2))
+df = ((s12/n1 + s22/n2)**2) / ((s12/n1)**2/(n1 - 1) + (s22/n2)**2/(n2 - 1))
+
+
+welch_pval <- 2*pt(-abs(t), df = df)
+welch_pval
+wilcox_pval <- wilcox.test(x1, x2)$p.value
+wilcox_pval
+
+```
+Gives approximately the same answers, but the tests are not the same, so 
+comparisons should be done with that in mind! 
+
+The Wilcoxon rank-sum test tests the hypothesis that the probability that a
+randomly drawn observation from one group is larger than a randomly drawn
+observation from the other is equal to 0.5 against an alternative hypothesis
+that the probability is not 0.5. In contrast, a t-test tests a null hypothesis
+of equal means in two groups against an alternative of unequal means. This is
+not the same.
+
+```{r}
+set.seed(1)
+n <- 10**4
+n1 <- n/2
+n2 <- n/2
+x1 <- rgamma(n1, shape = 5)
+x2 <- rnorm(n2, mean = 5)
+
+mean(x1)
+mean(x2)
+
+ggplot() +
+  geom_density(aes(x = x1)) +
+  geom_density(aes(x = x2))
+
+d_0 <- 0
+s12 = var(x1)
+s22 = var(x2)
+
+t = ((mean(x1) - mean(x2)) - d_0)/(sqrt(s12/n1 + s22/n2))
+df = ((s12/n1 + s22/n2)**2) / ((s12/n1)**2/(n1 - 1) + (s22/n2)**2/(n2 - 1))
+
+
+welch_pval <- 2*pt(-abs(t), df = df)
+welch_pval
+wilcox_pval <- wilcox.test(x1, x2)$p.value
+wilcox_pval
+```
 
 
 # Bayesian probability probability intervals
