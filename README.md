@@ -4,7 +4,7 @@ Notes on testing of statistical significance
 
 [Link to notes](https://thomas-rasmussen.github.io/statistical-significance/statistical-significance.html)
 
-[Link to slides](https://thomas-rasmussen.github.io/statistical-significance/slides/slides.html)
+[Link to slides](https://thomas-rasmussen.github.io/statistical-significance/slides/presentation.html)
 
 
 # Currently working on

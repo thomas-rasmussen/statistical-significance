@@ -1,0 +1,35 @@
+---
+title: "Statistical significance testing"
+format:
+  revealjs:
+    self-contained: true
+    theme: moon
+    title-slide-attributes:
+      data-background-image: https://i.imgflip.com/6gpr6f.jpg
+      data-background-size: contain
+bibliography: bibliography.bib
+csl: ama.csl
+citations-hover: false
+nocite: '@*'
+---
+
+## slide 1
+
+<!-- Note: crossrefs with revealjs does not currently work, ie clicking a -->
+<!-- reference in the slides will not jump to the references slides, but instead -->
+<!-- to the title slide. This problem is known and will hopefully be fixed in the -->
+<!-- future, see -->
+<!-- https://github.com/quarto-dev/quarto-cli/issues/306 -->
+
+test
+
+## test references
+
+reference test [@amrhein_scientists_2019]
+
+## References{.smaller}
+
+::: {#refs}
+:::
+
+
