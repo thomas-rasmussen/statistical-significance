@@ -1,18 +1,26 @@
 ---
 title: "Statistical significance"
-output:
-  html_document:
+format:
+  html:
+    self-contained: true
+    number-sections: true
+    theme: default
     toc: true
-    toc_depth: 2
-    toc_float: true
-    collapsed: false
-    number sections: true
-    self_contained: true
-    theme: lumen
+    toc-depth: 3
+    toc-location: left
+    toc-float: true
+    toc-title: Contents
+    citations-hover: true
+    footnotes-hover: true
+    code-fold: true
+    code-copy: true
+    code-tools: true
 bibliography: ./slides/bibliography.bib
-csl: ieee.csl
+csl: ama.csl
 nocite: '@*'
 ---
+
+<!-- Note: citations-hover does not work right now for some reason -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -21,8 +29,6 @@ library(dplyr)
 library(ggplot2)
 library(gtsummary)
 ```
-
-Notes on statistical significance.
 
 # What is a test statistic?
 
