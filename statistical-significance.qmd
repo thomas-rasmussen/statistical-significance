@@ -29,7 +29,7 @@ license: "Creative Commons Zero v1.0 Universal"
 
 <!-- Note: citations-hover does not work right now for some reason -->
 
-<!-- Can't seem to get manual control of appendixes and references to work. -->
+<!-- Can't seem to get manual control of placement of appendixes and references to work. -->
 
 <!-- Using the :::#refs ::: div does not seem to work, and sections with {.appendix} -->
 
@@ -54,16 +54,16 @@ of the sections?
 
 # Primer
 
-This section includes definitions and theorems that are either implicitly or explicitly used throughout the notes.
+This section includes various definitions and theorems that are either implicitly or explicitly used throughout the notes.
 
 ## Central limit theorem
 
-Test statistics are typically chosen so that the test statistic is
-approximately standard normal distributed in the limit, ie when
-$n \to \infty$. Then a standard z-test statistic can be used (if $n$ is
-not small) to estimate *p*-values.
-
-This is possible due to the central limit theorem.
+The Central Limit Theorem (CLT) is a fundamental theorem in probability theory.
+It establishes, that even though independent draws from a distribution are not
+normal distribution, their properly normalized sum do tend towards a normal
+distribution. This allows us to construct test statistics where we know the
+(asymptotic) distribtion of the test statistic, making it easy to estimate
+_p_-values.
 
 ::: {#thm-clt}
 
@@ -77,15 +77,30 @@ $$ Z = \lim_{n \to \infty}\frac{\hat{X}_n - \mu}{\sigma / \sqrt{n}} \sim \mathca
 
 :::
 
+
 # Test statistics 
 
 ## What is a test statistic?
 
-A test statistic is a numerical summary of some sample, $X$, to one
-value that can be used to perform a hypothesis test. The test statistic
-is chosen/defined in such a way that its sampling distribution under the
-null hypothesis of interest is calculable, either exactly or
-approximately, so it can be used to calculate *p*-values.
+A test statistic is a numerical summary of a sample, $X_1, \dots, X_n$, that can
+be used to perform a hypothesis test. The test statistic is chosen/defined in
+such a way that its sampling distribution under the null hypothesis of interest is calculable, either exactly or approximately, so it can be used to calculate *p*-values.
+
+Descriptive and test statistics share some qualities, but test statistics are
+specifically intended for use in statistical testing, whereas descriptive statistics
+are mainly used for interpretation. For example, continuous variables are often
+summarized as a median and interquartile intervals for descriptive purposes, but those
+statistics are not suitable for statistical testing since it is difficult to determine
+their distributions. On the other hand, the t-test statistic is
+an often use test statistic, but it is hard to interpret making it a less ideal
+descriptive statistic.
+
+## Example - One sample Z-test
+
+Assume 
+
+
+
 
 Normal distributed data, unknown variance
 
@@ -364,5 +379,26 @@ welch_pval
 wilcox_pval <- wilcox.test(x1, x2)$p.value
 wilcox_pval
 ```
+
+
+
+# p-hacking
+
+P-hacking, also called significance chasing, data-dredging, fishing etc, is the
+malpratice of finding patterns in the data that can be presented as statistical
+significant, thereby increasing the risk of false positives.
+
+A common example is exploratory studies where results are cherry-picked for
+presentation based on the their p-value. 
+
+All data will have spurious associtations. Testing a hypothesis should be done
+with data that was not used to formulate the hypothesis. If p-hacking is done
+to find "interesting results", that are then reported as if there was an a priori
+hypothesis, that will greatly increase the risk of false positives.
+
+Any hypothesis discovered this way needs to be tested in a new sample.
+
+
+
 
 # Appendix
